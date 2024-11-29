@@ -18,13 +18,21 @@
 
 typedef enum {
   IDLE,
-  SWIPING,
   COOLDOWN
 } SWIPE_STATE;
 
+typedef enum {
+  START,
+  GRAB,
+} GRAB_STATE;
+
+
 static LEAP_CONNECTION* connectionHandle;
 SWIPE_STATE swipeState = IDLE;
+GRAB_STATE grabState = START;
 int swipe_frame_count = 0;
+int grab_frame_count = 0;
+int release_frame_count = 0;
 int cooldown_frame_count = 0;
 
 bool swiped(LEAP_HAND* hand) {
@@ -67,8 +75,31 @@ void detectCutOff(LEAP_HAND* hand) {
   printf("%s hand with %s level\n",(hand->type == eLeapHandType_Left ? "left" : "right"),(pos_y >= 12 && pos_y<22)? "low":
   (pos_y>=22&&pos_y<32)?"medium":
   (pos_y>=32&&pos_y<42)?"high":"out of range");
-
 }
+
+void reverb_detect(LEAP_HAND* hand) {
+  float squeeze = hand->grab_strength;
+  //printf("hand squeezed with strength: %f\n",squeeze);
+  switch(grabState) {
+    case START:
+      if(squeeze == 1.0) {
+        printf("Time based effect start\n");
+        grabState = GRAB;
+      }
+    break;
+    case GRAB:
+      if(squeeze==0) {
+        printf("End signal detected\n");
+        grabState = START;
+      }
+    break;
+
+    default:
+      grabState = START;
+    break;
+  }
+}
+
 /** Callback for when the connection opens. */
 static void OnConnect(void){
   printf("Connected.\n");
@@ -101,6 +132,7 @@ static void OnFrame(const LEAP_TRACKING_EVENT *frame){
         float grab = hand->grab_strength;
         printf("Pinch strength %f in %s hand with grab strength %f \n", pinch,(hand->type == eLeapHandType_Left ? "left" : "right"), grab );*/
         swiped(hand);
+        reverb_detect(hand);
   }
 
 }
