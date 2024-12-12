@@ -9,6 +9,8 @@
 #include "wifi.h"
 #include "pthread.h"
 
+
+
 #define MAX_FRAME 1
 #define COOLDOWN_FRAMES 20
 #define SWIPE_VELOCITY_THRESHOLD 30.0 // cm/s
