@@ -104,9 +104,10 @@ void* wifiRoutine(void* arg) {
             pthread_mutex_lock(mutex);
             memset(buffer, 0, BUFFER_SIZE);
             ssize_t bytes_received = recv(client_socket, buffer, BUFFER_SIZE - 1, 0);
+
             if (bytes_received <= 0) {
-                printf("Client disconnected\n");
                 pthread_mutex_unlock(mutex);
+                printf("Client disconnected\n");
                 break;
             }
             printf("Received message: %s\n", buffer);

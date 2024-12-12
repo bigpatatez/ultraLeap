@@ -1,4 +1,0 @@
-C:/Users/Belgin Ayvat/Desktop/ultraLeap/cmake-build-debug/CMakeFiles/example.dir
-C:/Users/Belgin Ayvat/Desktop/ultraLeap/cmake-build-debug/CMakeFiles/callback.dir
-C:/Users/Belgin Ayvat/Desktop/ultraLeap/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Belgin Ayvat/Desktop/ultraLeap/cmake-build-debug/CMakeFiles/rebuild_cache.dir

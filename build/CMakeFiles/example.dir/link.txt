@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/example.dir/PollingSample.c.o CMakeFiles/example.dir/ExampleConnection.c.o -o example   -L/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib  -Wl,-rpath,/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib -L/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib -lLeapC 

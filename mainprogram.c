@@ -169,9 +169,9 @@ static void OnFrame(const LEAP_TRACKING_EVENT *frame)
     for(uint32_t h = 0; h < frame->nHands; h++){
         LEAP_HAND* hand = &frame->pHands[h];
         swiped(hand);
-        pthread_mutex_lock(&buffer_mutex);
-        printf("current buffer value %s\n",buffer);
-        pthread_mutex_unlock(&buffer_mutex);
+        //pthread_mutex_lock(&buffer_mutex);
+        printf("current buffer value %s\n", buffer);
+        //pthread_mutex_unlock(&buffer_mutex);
         //reverb_detect(hand);
         // detectCutOff( hand);
 

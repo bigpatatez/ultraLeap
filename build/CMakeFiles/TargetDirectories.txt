@@ -1,0 +1,5 @@
+/home/ubuntu/ultraLeap/build/CMakeFiles/example.dir
+/home/ubuntu/ultraLeap/build/CMakeFiles/callback.dir
+/home/ubuntu/ultraLeap/build/CMakeFiles/wifiTry.dir
+/home/ubuntu/ultraLeap/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/ultraLeap/build/CMakeFiles/rebuild_cache.dir
