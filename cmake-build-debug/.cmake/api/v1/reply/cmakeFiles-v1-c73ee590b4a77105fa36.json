@@ -91,8 +91,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/ubuntu/leapTry/cmake-build-debug",
-		"source" : "/home/ubuntu/leapTry"
+		"build" : "/home/ubuntu/ultraLeap/cmake-build-debug",
+		"source" : "/home/ubuntu/ultraLeap"
 	},
 	"version" : 
 	{

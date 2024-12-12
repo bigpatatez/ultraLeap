@@ -11,8 +11,9 @@
 #include <stdlib.h>
 #include "LeapC.h"
 #include "ExampleConnection.h"
+#include "bram.h"
 
-#define MAX_FRAME 20
+#define MAX_FRAME 1
 #define COOLDOWN_FRAMES 20
 #define SWIPE_VELOCITY_THRESHOLD 30.0 // cm/s
 
@@ -26,6 +27,7 @@ typedef enum {
   GRAB,
 } GRAB_STATE;
 
+BRAMReader reader;
 
 static LEAP_CONNECTION* connectionHandle;
 SWIPE_STATE swipeState = IDLE;
@@ -45,6 +47,8 @@ bool swiped(LEAP_HAND* hand) {
         //printf("passed the threshold, frame_count = %d\n",swipe_frame_count);
         if(swipe_frame_count>=MAX_FRAME) {
           printf("Right swipe detected\n\n");
+          writeBRAMData(&reader,0,0x1);
+          printf("Wrote to memory\n");
           swipeState = COOLDOWN;
           cooldown_frame_count = 0;
           swipe_frame_count = 0;
@@ -103,6 +107,10 @@ void reverb_detect(LEAP_HAND* hand) {
 /** Callback for when the connection opens. */
 static void OnConnect(void){
   printf("Connected.\n");
+  int success = initBRAMReader(&reader);
+  if(success == -1){
+  	printf("error when initializing the bram reader\n");
+  }
 }
 
 /** Callback for when a device is found. */
@@ -111,30 +119,32 @@ static void OnDevice(const LEAP_DEVICE_INFO *props){
 }
 
 /** Callback for when a frame of tracking data is available. */
-static void OnFrame(const LEAP_TRACKING_EVENT *frame){
-  if (frame->info.frame_id % 100 == 0)
+static void OnFrame(const LEAP_TRACKING_EVENT *frame)
+{
+  if (frame->info.frame_id %100==0)
     printf("Frame %lli with %i hands.\n", (long long int)frame->info.frame_id, frame->nHands);
 
   for(uint32_t h = 0; h < frame->nHands; h++){
-        LEAP_HAND* hand = &frame->pHands[h];
-        //This is for the levels in each mode --> the distances need to be broken down into a scale
-        /*double pos_y = (hand->palm.position.y)/10.0;
-        printf("%s hand with %s level\n",(hand->type == eLeapHandType_Left ? "left" : "right"),(pos_y >= 12 && pos_y<22)? "low":
-        (pos_y>=22&&pos_y<32)?"medium":
-        (pos_y>=32&&pos_y<42)?"high":"out of range");*/
+    LEAP_HAND* hand = &frame->pHands[h];
+    //This is for the levels in each mode --> the distances need to be broken down into a scale
+    /*double pos_y = (hand->palm.position.y)/10.0;
+    printf("%s hand with %s level\n",(hand->type == eLeapHandType_Left ? "left" : "right"),(pos_y >= 12 && pos_y<22)? "low":
+    (pos_y>=22&&pos_y<32)?"medium":
+    (pos_y>=32&&pos_y<42)?"high":"out of range");*/
 
-        /*printf("%s hand with height (%f cm).\n",
-                    (hand->type == eLeapHandType_Left ? "left" : "right"),
-                    (hand->palm.position.y)/10.0);*/
+    /*printf("%s hand with height (%f cm).\n",
+                (hand->type == eLeapHandType_Left ? "left" : "right"),
+                (hand->palm.position.y)/10.0);*/
 
-        /*//Uncomment this part to detect pinching
-        float pinch = hand->pinch_strength;
-        float grab = hand->grab_strength;
-        printf("Pinch strength %f in %s hand with grab strength %f \n", pinch,(hand->type == eLeapHandType_Left ? "left" : "right"), grab );*/
-        swiped(hand);
-        reverb_detect(hand);
+    /*//Uncomment this part to detect pinching
+    float pinch = hand->pinch_strength;
+    float grab = hand->grab_strength;
+    printf("Pinch strength %f in %s hand with grab strength %f \n", pinch,(hand->type == eLeapHandType_Left ? "left" : "right"), grab );*/
+    swiped(hand);
+    //reverb_detect(hand);
+   // detectCutOff( hand);
+
   }
-
 }
 
 static void OnImage(const LEAP_IMAGE_EVENT *image){

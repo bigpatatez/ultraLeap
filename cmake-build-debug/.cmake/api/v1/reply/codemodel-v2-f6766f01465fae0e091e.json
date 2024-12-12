@@ -41,7 +41,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "callback::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-callback-Debug-9f3257fa5e2d8592d646.json",
+					"jsonFile" : "target-callback-Debug-bb46598a6d82499f5eea.json",
 					"name" : "callback",
 					"projectIndex" : 0
 				},
@@ -58,8 +58,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/ubuntu/leapTry/cmake-build-debug",
-		"source" : "/home/ubuntu/leapTry"
+		"build" : "/home/ubuntu/ultraLeap/cmake-build-debug",
+		"source" : "/home/ubuntu/ultraLeap"
 	},
 	"version" : 
 	{

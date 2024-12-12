@@ -1,4 +1,4 @@
-/home/ubuntu/leapTry/cmake-build-debug/CMakeFiles/example.dir
-/home/ubuntu/leapTry/cmake-build-debug/CMakeFiles/callback.dir
-/home/ubuntu/leapTry/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ubuntu/leapTry/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/ultraLeap/cmake-build-debug/CMakeFiles/example.dir
+/home/ubuntu/ultraLeap/cmake-build-debug/CMakeFiles/callback.dir
+/home/ubuntu/ultraLeap/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ubuntu/ultraLeap/cmake-build-debug/CMakeFiles/rebuild_cache.dir

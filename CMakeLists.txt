@@ -7,5 +7,5 @@ link_directories(/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-
 add_executable(example PollingSample.c ExampleConnection.c)
 target_link_libraries(example -L/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib -lLeapC)
 
-add_executable(callback CallbackSample.c ExampleConnection.c)
+add_executable(callback CallbackSample.c ExampleConnection.c bram.c)
 target_link_libraries(callback -L/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib -lLeapC)

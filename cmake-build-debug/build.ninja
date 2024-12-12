@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /home/ubuntu/leapTry/cmake-build-debug/
+cmake_ninja_workdir = /home/ubuntu/ultraLeap/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target example
 
@@ -49,14 +49,14 @@ cmake_ninja_workdir = /home/ubuntu/leapTry/cmake-build-debug/
 
 build cmake_object_order_depends_target_example: phony || .
 
-build CMakeFiles/example.dir/PollingSample.c.o: C_COMPILER__example_unscanned_Debug /home/ubuntu/leapTry/PollingSample.c || cmake_object_order_depends_target_example
+build CMakeFiles/example.dir/PollingSample.c.o: C_COMPILER__example_unscanned_Debug /home/ubuntu/ultraLeap/PollingSample.c || cmake_object_order_depends_target_example
   DEP_FILE = CMakeFiles/example.dir/PollingSample.c.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/include
   OBJECT_DIR = CMakeFiles/example.dir
   OBJECT_FILE_DIR = CMakeFiles/example.dir
 
-build CMakeFiles/example.dir/ExampleConnection.c.o: C_COMPILER__example_unscanned_Debug /home/ubuntu/leapTry/ExampleConnection.c || cmake_object_order_depends_target_example
+build CMakeFiles/example.dir/ExampleConnection.c.o: C_COMPILER__example_unscanned_Debug /home/ubuntu/ultraLeap/ExampleConnection.c || cmake_object_order_depends_target_example
   DEP_FILE = CMakeFiles/example.dir/ExampleConnection.c.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/include
@@ -90,15 +90,22 @@ build example: C_EXECUTABLE_LINKER__example_Debug CMakeFiles/example.dir/Polling
 
 build cmake_object_order_depends_target_callback: phony || .
 
-build CMakeFiles/callback.dir/CallbackSample.c.o: C_COMPILER__callback_unscanned_Debug /home/ubuntu/leapTry/CallbackSample.c || cmake_object_order_depends_target_callback
+build CMakeFiles/callback.dir/CallbackSample.c.o: C_COMPILER__callback_unscanned_Debug /home/ubuntu/ultraLeap/CallbackSample.c || cmake_object_order_depends_target_callback
   DEP_FILE = CMakeFiles/callback.dir/CallbackSample.c.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/include
   OBJECT_DIR = CMakeFiles/callback.dir
   OBJECT_FILE_DIR = CMakeFiles/callback.dir
 
-build CMakeFiles/callback.dir/ExampleConnection.c.o: C_COMPILER__callback_unscanned_Debug /home/ubuntu/leapTry/ExampleConnection.c || cmake_object_order_depends_target_callback
+build CMakeFiles/callback.dir/ExampleConnection.c.o: C_COMPILER__callback_unscanned_Debug /home/ubuntu/ultraLeap/ExampleConnection.c || cmake_object_order_depends_target_callback
   DEP_FILE = CMakeFiles/callback.dir/ExampleConnection.c.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/include
+  OBJECT_DIR = CMakeFiles/callback.dir
+  OBJECT_FILE_DIR = CMakeFiles/callback.dir
+
+build CMakeFiles/callback.dir/bram.c.o: C_COMPILER__callback_unscanned_Debug /home/ubuntu/ultraLeap/bram.c || cmake_object_order_depends_target_callback
+  DEP_FILE = CMakeFiles/callback.dir/bram.c.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/include
   OBJECT_DIR = CMakeFiles/callback.dir
@@ -112,7 +119,7 @@ build CMakeFiles/callback.dir/ExampleConnection.c.o: C_COMPILER__callback_unscan
 #############################################
 # Link the executable callback
 
-build callback: C_EXECUTABLE_LINKER__callback_Debug CMakeFiles/callback.dir/CallbackSample.c.o CMakeFiles/callback.dir/ExampleConnection.c.o
+build callback: C_EXECUTABLE_LINKER__callback_Debug CMakeFiles/callback.dir/CallbackSample.c.o CMakeFiles/callback.dir/ExampleConnection.c.o CMakeFiles/callback.dir/bram.c.o
   FLAGS = -g
   LINK_LIBRARIES = -Wl,-rpath,/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib  -L/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib  -lLeapC
   LINK_PATH = -L/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib
@@ -127,7 +134,7 @@ build callback: C_EXECUTABLE_LINKER__callback_Debug CMakeFiles/callback.dir/Call
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ubuntu/leapTry/cmake-build-debug && /snap/clion/306/bin/cmake/linux/aarch64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/ubuntu/ultraLeap/cmake-build-debug && /snap/clion/306/bin/cmake/linux/aarch64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -138,7 +145,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ubuntu/leapTry/cmake-build-debug && /snap/clion/306/bin/cmake/linux/aarch64/bin/cmake --regenerate-during-build -S/home/ubuntu/leapTry -B/home/ubuntu/leapTry/cmake-build-debug
+  COMMAND = cd /home/ubuntu/ultraLeap/cmake-build-debug && /snap/clion/306/bin/cmake/linux/aarch64/bin/cmake --regenerate-during-build -S/home/ubuntu/ultraLeap -B/home/ubuntu/ultraLeap/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -154,7 +161,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 
 #############################################
-# Folder: /home/ubuntu/leapTry/cmake-build-debug
+# Folder: /home/ubuntu/ultraLeap/cmake-build-debug
 
 build all: phony example callback
 
@@ -165,14 +172,14 @@ build all: phony example callback
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/ubuntu/leapTry/CMakeLists.txt /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/ubuntu/ultraLeap/CMakeLists.txt /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/ubuntu/leapTry/CMakeLists.txt /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake: phony
+build /home/ubuntu/ultraLeap/CMakeLists.txt /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Compiler/GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU-C.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-GNU.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/Linux.cmake /snap/clion/306/bin/cmake/linux/aarch64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.30.5/CMakeCCompiler.cmake CMakeFiles/3.30.5/CMakeSystem.cmake: phony
 
 
 #############################################
