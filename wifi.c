@@ -4,9 +4,10 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
+#include "wifi.h"
 
 #define PORT 1212
-#define BUFFER_SIZE 8
+
 
 // Function to get the local IP address
 char* get_local_ip() {
@@ -47,12 +48,16 @@ char* get_local_ip() {
     return local_ip;
 }
 
-int main() {
+void* wifiRoutine(void* arg) {
     char* HOST = get_local_ip();//"192.168.243.66";
     int server_socket, client_socket;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
-    char buffer[BUFFER_SIZE];
+    //char buffer[BUFFER_SIZE]; // this should be common to both threads
+    ThreadArgs* args = (ThreadArgs*)arg;
+    char* buffer = args->buffer;
+    pthread_mutex_t* mutex = args->mutex;
+    int BUFFER_SIZE = args->size;
 
     // Create the server socket
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -96,16 +101,17 @@ int main() {
 
         // Receive data from the client
         while (1) {
+            pthread_mutex_lock(mutex);
             memset(buffer, 0, BUFFER_SIZE);
             ssize_t bytes_received = recv(client_socket, buffer, BUFFER_SIZE - 1, 0);
             if (bytes_received <= 0) {
                 printf("Client disconnected\n");
+                pthread_mutex_unlock(mutex);
                 break;
             }
-
             printf("Received message: %s\n", buffer);
+            pthread_mutex_unlock(mutex);
         }
-
         // Close the client socket
         close(client_socket);
     }

@@ -7,6 +7,7 @@
  *
  */
 
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "LeapC.h"
@@ -235,6 +236,7 @@ int main(int argc, char** argv) {
   ConnectionCallbacks.on_log_message         = &OnLogMessage;
   //ConnectionCallbacks.on_head_pose           = &OnHeadPose;
 
+  pthread_t wifiThread;
   connectionHandle = OpenConnection();
   {
     LEAP_ALLOCATOR allocator = { allocate, deallocate, NULL };

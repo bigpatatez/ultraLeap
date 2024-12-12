@@ -1,0 +1,1 @@
+  -L"/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib"  -L/home/ubuntu/ultraleap-hand-tracking-service_5.17.1.0-a9f25232-arm64/LeapSDK/lib -lLeapC -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

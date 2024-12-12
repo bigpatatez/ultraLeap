@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10"
@@ -41,14 +41,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "callback::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-callback-Debug-bb46598a6d82499f5eea.json",
+					"jsonFile" : "target-callback-Debug-b838b38c726905d6e3e5.json",
 					"name" : "callback",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "example::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-example-Debug-7363233cc56e90ffbb6b.json",
+					"jsonFile" : "target-example-Debug-c143cb20b7884a954d51.json",
 					"name" : "example",
 					"projectIndex" : 0
 				}
@@ -58,8 +58,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/ubuntu/ultraLeap/cmake-build-debug",
-		"source" : "/home/ubuntu/ultraLeap"
+		"build" : "C:/Users/Belgin Ayvat/Desktop/ultraLeap/cmake-build-debug",
+		"source" : "C:/Users/Belgin Ayvat/Desktop/ultraLeap"
 	},
 	"version" : 
 	{
