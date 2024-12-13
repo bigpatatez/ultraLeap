@@ -10,4 +10,6 @@ void cleanupBRAMReader(BRAMReader* reader);
 int readBRAMData(BRAMReader* reader, size_t offset, uint32_t* data);
 int writeBRAMData(BRAMReader* reader, size_t offset, uint32_t data);
 bool checkBits(uint32_t value, uint32_t bitmask);
+int modifyBRAMBits(BRAMReader* reader, size_t offset, uint32_t mask, uint32_t bitValues);
+
 #endif 
