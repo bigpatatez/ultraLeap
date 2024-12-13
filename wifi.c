@@ -101,7 +101,6 @@ void* wifiRoutine(void* arg) {
 
         // Receive data from the client
         while (1) {
-            pthread_mutex_lock(mutex);
             memset(buffer, 0, BUFFER_SIZE);
             ssize_t bytes_received = recv(client_socket, buffer, BUFFER_SIZE - 1, 0);
 
@@ -110,8 +109,12 @@ void* wifiRoutine(void* arg) {
                 printf("Client disconnected\n");
                 break;
             }
-            printf("Received message: %s\n", buffer);
+            int received_value = atoi(buffer);
+            printf("Received message: %i\n", received_Value);
+            pthread_mutex_lock(mutex);
+            writeBRAMData(args.reader, 0, received_value);
             pthread_mutex_unlock(mutex);
+            
         }
         // Close the client socket
         close(client_socket);

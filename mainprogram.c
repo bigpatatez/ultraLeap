@@ -1,3 +1,4 @@
+
 //
 // Created by Belgin Ayvat on 12/12/2024.
 //
@@ -124,6 +125,7 @@ static void OnConnect(void){
     args.buffer = buffer;
     args.size = BUFFER_SIZE;
     args.mutex = &buffer_mutex;
+    args.reader = &reader;
     pthread_create(&wifi_thread, NULL,wifiRoutine, &args);
 }
 
@@ -169,6 +171,7 @@ static void OnFrame(const LEAP_TRACKING_EVENT *frame)
     if (frame->info.frame_id %100==0)
         {printf("Frame %lli with %i hands.\n", (long long int)frame->info.frame_id, frame->nHands);
 	printf("buffer value %s\n", buffer);}
+
     for(uint32_t h = 0; h < frame->nHands; h++){
         LEAP_HAND* hand = &frame->pHands[h];
         swiped(hand);
