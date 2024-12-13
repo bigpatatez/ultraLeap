@@ -36,7 +36,7 @@ int grab_frame_count = 0;
 int release_frame_count = 0;
 int cooldown_frame_count = 0;
 
-char buffer[BUFFER_SIZE];
+char* buffer = malloc(sizeOf(char)*[BUFFER_SIZE]);
 pthread_t wifi_thread;
 pthread_mutex_t buffer_mutex;
 
