@@ -58,6 +58,7 @@ void* wifiRoutine(void* arg) {
     char* buffer = args->buffer;
     pthread_mutex_t* mutex = args->mutex;
     int BUFFER_SIZE = args->size;
+    BRAMReader* reader = args->reader;
 
     // Create the server socket
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -110,9 +111,9 @@ void* wifiRoutine(void* arg) {
                 break;
             }
             int received_value = atoi(buffer);
-            printf("Received message: %i\n", received_Value);
+            printf("Received message: %i\n", received_value);
             pthread_mutex_lock(mutex);
-            writeBRAMData(args.reader, 0, received_value);
+            writeBRAMData(reader,0, received_value);
             pthread_mutex_unlock(mutex);
             
         }

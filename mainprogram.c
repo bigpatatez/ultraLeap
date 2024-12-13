@@ -164,13 +164,15 @@ static void deallocate(void* ptr, void* state) {
         return;
     free(ptr);
 }
-
+uint32_t data;
 /** Callback for when a frame of tracking data is available. */
 static void OnFrame(const LEAP_TRACKING_EVENT *frame)
 {
     if (frame->info.frame_id %100==0)
         {printf("Frame %lli with %i hands.\n", (long long int)frame->info.frame_id, frame->nHands);
-	printf("buffer value %s\n", buffer);}
+        readBRAMData(&reader,0,&data);
+	printf("buffer value %d\n",data);
+	}
 
     for(uint32_t h = 0; h < frame->nHands; h++){
         LEAP_HAND* hand = &frame->pHands[h];

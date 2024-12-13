@@ -317,7 +317,8 @@ CMakeFiles/wifiTry.dir/wifi.c.o: ../wifi.c \
   /usr/include/aarch64-linux-gnu/bits/setjmp.h \
   /usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
-  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h
+  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h \
+  ../bram.h
 
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h:
