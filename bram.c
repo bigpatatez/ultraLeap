@@ -71,3 +71,8 @@ int modifyBRAMBits(BRAMReader* reader, size_t offset, uint32_t mask, uint32_t bi
     reader->bram[offset] = (reader->bram[offset] & ~mask) | bitValues;
     return 0;
 }
+// Function to check if specific bits are set
+bool checkBits(uint32_t value, uint32_t bitmask) {
+    return (value & bitmask) == bitmask;
+}
+

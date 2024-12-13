@@ -1,5 +1,4 @@
-
-//
+/
 // Created by Belgin Ayvat on 12/12/2024.
 //
 #include <stdio.h>
@@ -16,6 +15,30 @@
 #define COOLDOWN_FRAMES 20
 #define SWIPE_VELOCITY_THRESHOLD 30.0 // cm/s
 #define BUFFER_SIZE 8
+
+#define PAUSE_MASK 0x1
+#define MODE_MASK 0x6
+#define VOLUME_MASK 0x7F8
+#define REVERB_MASK 0x800
+#define FILTER_TYPE_MASK 0x1C000
+#define FILTER_CUTOFF_MASK 0xC000
+
+//VALUES THAT IS NEEDED TO BE SET
+#define PAUSE 0x1
+#define VOLUME_MODE 0x2
+#define REVERB_MODE 0x4
+#define FILTER_MODE 0x6
+#define VOL_LOW 0x8
+#define VOL_MED 0x10
+#define VOL_HIGH 0x18
+#define REVERB_ON 0x800
+#define FILTER1 0x1000
+#define FILTER2 0x2000
+#define FILTER3 0x3000
+#define FILTER4 0x4000
+#define FILTERLOW 0x8000
+#define FILTERMED 0x10000
+#define FILTERHIGH 0x18000
 
 typedef enum {
     IDLE,
