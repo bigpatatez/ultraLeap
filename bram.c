@@ -68,6 +68,6 @@ int modifyBRAMBits(BRAMReader* reader, size_t offset, uint32_t mask, uint32_t bi
         return -1;
     }
     bitValues &= mask;
-    reader->bram[offset] = (reader->bram[offset] & ~mask) | bitValues;
+    reader->bram[offset] = (reader->bram[offset] & ~mask) | (bitValues & mask);
     return 0;
 }
