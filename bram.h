@@ -1,6 +1,6 @@
 #ifndef BRAM_H
 #define BRAM_H
-
+#include <stdbool.h>
 typedef struct{
 	int fd;
     	uint32_t* bram;

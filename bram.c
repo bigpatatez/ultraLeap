@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
+#include <stdbool.h>
 
 typedef struct {
     int fd;
@@ -68,7 +69,7 @@ int modifyBRAMBits(BRAMReader* reader, size_t offset, uint32_t mask, uint32_t bi
         return -1;
     }
     bitValues &= mask;
-    reader->bram[offset] = (reader->bram[offset] & ~mask) | (bitValues & mask);
+    reader->bram[offset] = (reader->bram[offset] & ~mask) | bitValues;
     return 0;
 }
 // Function to check if specific bits are set

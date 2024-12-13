@@ -138,7 +138,8 @@ CMakeFiles/wifiTry.dir/bram.c.o: ../bram.c \
   /usr/include/aarch64-linux-gnu/bits/mman.h \
   /usr/include/aarch64-linux-gnu/bits/mman-map-flags-generic.h \
   /usr/include/aarch64-linux-gnu/bits/mman-linux.h \
-  /usr/include/aarch64-linux-gnu/bits/mman-shared.h
+  /usr/include/aarch64-linux-gnu/bits/mman-shared.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h
 
 CMakeFiles/wifiTry.dir/mainprogram.c.o: ../mainprogram.c \
   /usr/include/stdc-predef.h \
