@@ -51,8 +51,8 @@ bool swiped(LEAP_HAND* hand) {
                 //printf("passed the threshold, frame_count = %d\n",swipe_frame_count);
                 if(swipe_frame_count>=MAX_FRAME) {
                     printf("Right swipe detected\n\n");
-                    writeBRAMData(&reader,0,0x1);
-                    printf("Wrote to memory\n");
+                    //writeBRAMData(&reader,0,0x1);
+                    //printf("Wrote to memory\n");
                     swipeState = COOLDOWN;
                     cooldown_frame_count = 0;
                     swipe_frame_count = 0;
@@ -123,6 +123,7 @@ static void OnConnect(void){
     args.buffer = buffer;
     args.size = BUFFER_SIZE;
     args.mutex = &buffer_mutex;
+    args.reader = &reader;
     pthread_create(&wifi_thread, NULL,wifiRoutine, &args);
 }
 
@@ -165,14 +166,19 @@ static void deallocate(void* ptr, void* state) {
 /** Callback for when a frame of tracking data is available. */
 static void OnFrame(const LEAP_TRACKING_EVENT *frame)
 {
-    if (frame->info.frame_id %100==0)
+    if (frame->info.frame_id %100==0){
         printf("Frame %lli with %i hands.\n", (long long int)frame->info.frame_id, frame->nHands);
+        pthread_mutex_lock(mutex);
+        int received_Value
+        readBRAMData(args.reader, 0, received_Value);
+        pthread_mutex_unlock(mutex);
+        printf("current bram value %s\n",received_Value );
+    }
 
     for(uint32_t h = 0; h < frame->nHands; h++){
         LEAP_HAND* hand = &frame->pHands[h];
         swiped(hand);
         //pthread_mutex_lock(&buffer_mutex);
-        printf("current buffer value %s\n", buffer);
         //pthread_mutex_unlock(&buffer_mutex);
         //reverb_detect(hand);
         // detectCutOff( hand);
