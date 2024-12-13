@@ -110,7 +110,7 @@ void* wifiRoutine(void* arg) {
                 break;
             }
             int received_value = atoi(buffer);
-            printf("Received message: %i\n", received_Value);
+            printf("Received message: %i\n", received_value);
             pthread_mutex_lock(mutex);
             writeBRAMData(args.reader, 0, received_value);
             pthread_mutex_unlock(mutex);

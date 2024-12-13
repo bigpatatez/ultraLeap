@@ -61,3 +61,13 @@ int writeBRAMData(BRAMReader* reader, size_t offset, uint32_t data) {
     reader->bram[offset] = data;
     return 0;
 }
+
+int modifyBRAMBits(BRAMReader* reader, size_t offset, uint32_t mask, uint32_t bitValues){
+    if (offset >= (BRAM_SIZE / sizeof(uint32_t))) {
+        fprintf(stderr, "Offset out of bounds\n");
+        return -1;
+    }
+    bitValues &= mask;
+    reader->bram[offset] = (reader->bram[offset] & ~mask) | bitValues;
+    return 0;
+}
