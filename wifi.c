@@ -115,13 +115,13 @@ void* wifiRoutine(void* arg) {
             if (received_value == 0){
                 pthread_mutex_lock(mutex);
                 int current_value;
-                readBRAMData(&reader, 0, current_value);
-	            modifyBRAMBits(&reader, 0, 0x1, current_value ^ 0x1);
+                readBRAMData(reader, 0, current_value);
+	            modifyBRAMBits(reader, 0, 0x1, current_value ^ 0x1);
 	            pthread_mutex_unlock(mutex);
             } else {
             	received_value <<= 1;
                 pthread_mutex_lock(mutex);
-	            modifyBRAMBits(&reader, 0, 0x6, received_value);
+	            modifyBRAMBits(reader, 0, 0x6, received_value);
 	            pthread_mutex_unlock(mutex);
                 if (received_value == 0x6){// listen to new button to determine filter type, then set it into memory
                     printf("Selecting filter type, press another button");
