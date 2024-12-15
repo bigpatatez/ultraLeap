@@ -49,11 +49,28 @@ typedef enum {
     GRAB,
   } GRAB_STATE;
 
+typedef enum {
+	NOMODE,
+	VOLUME,
+	REVERB,
+	FILTER
+}MODE;
+
+typedef enum {
+	NOFILTER,
+	FILTER_1,
+	FILTER_2,
+	FILTER_3,
+	FILTER_4
+}FILTER_TYPE;
+
 BRAMReader reader;
 
 static LEAP_CONNECTION* connectionHandle;
 SWIPE_STATE swipeState = IDLE;
 GRAB_STATE grabState = START;
+MODE mode = IDLE;
+FILTER_TYPE filter_t = NOFILTER; 
 int swipe_frame_count = 0;
 int grab_frame_count = 0;
 int release_frame_count = 0;
@@ -62,7 +79,6 @@ int cooldown_frame_count = 0;
 char* buffer;
 pthread_t wifi_thread;
 pthread_mutex_t buffer_mutex;
-
 
 bool swiped(LEAP_HAND* hand) {
     //printf("palm velocity in x: %f cm/s\n",hand->palm.velocity.x/10.0);
@@ -73,9 +89,8 @@ bool swiped(LEAP_HAND* hand) {
                 swipe_frame_count++;
                 //printf("passed the threshold, frame_count = %d\n",swipe_frame_count);
                 if(swipe_frame_count>=MAX_FRAME) {
-                    printf("Right swipe detected\n\n");
-                    //writeBRAMData(&reader,0,0x1);
-                    //printf("Wrote to memory\n");
+                    printf("Switching songs\n\n");
+           			// here something needs to be written down to memory to change the currently playing song
                     swipeState = COOLDOWN;
                     cooldown_frame_count = 0;
                     swipe_frame_count = 0;
@@ -186,19 +201,63 @@ static void deallocate(void* ptr, void* state) {
         return;
     free(ptr);
 }
+
+void getMode(uint32_t data){
+
+	uint32_t mode_num = extract_bits(data,1,2);
+	
+	
+	if(mode_num == 0x1){
+		mode = VOLUME;	
+	}
+	else if(mode_num == 0x2){
+		mode = REVERB;
+	}
+	else if(mode_num == 0x3){
+		mode = FILTER;
+	}
+	else{
+		mode = NOMODE;
+	}
+	
+}
+
+
 uint32_t data;
 /** Callback for when a frame of tracking data is available. */
 static void OnFrame(const LEAP_TRACKING_EVENT *frame)
 {
     if (frame->info.frame_id %100==0)
         {printf("Frame %lli with %i hands.\n", (long long int)frame->info.frame_id, frame->nHands);
+		pthread_mutex_lock(&buffer_mutex);
         readBRAMData(&reader,0,&data);
+        pthread_mutex_unlock(&buffer_mutex);
 		printf("buffer value %#x\n",data);
+		getMode(data);
 	}
+	
 
     for(uint32_t h = 0; h < frame->nHands; h++){
         LEAP_HAND* hand = &frame->pHands[h];
         swiped(hand);
+        switch(mode){
+        	case NOMODE:
+        		printf("idle mode\n");
+        	break;
+        	case VOLUME:
+        		printf("volume mode\n");
+        	break;
+        	case REVERB:
+        		printf("reverb mode\n");
+        	break;
+        	case FILTER:
+        		printf("filter mode: a filter type needs to be chosen\n");
+        	break;
+
+        	default:
+        		break;
+ 		
+        }
         //pthread_mutex_lock(&buffer_mutex);
         //printf("current buffer value %s\n", buffer);
         //pthread_mutex_unlock(&buffer_mutex);
