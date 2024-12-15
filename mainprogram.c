@@ -192,8 +192,8 @@ static void OnFrame(const LEAP_TRACKING_EVENT *frame)
 {
     if (frame->info.frame_id %100==0)
         {printf("Frame %lli with %i hands.\n", (long long int)frame->info.frame_id, frame->nHands);
-        //readBRAMData(&reader,0,&data);
-	printf("buffer value %d\n",data);
+        readBRAMData(&reader,0,&data);
+		printf("buffer value %#x\n",data);
 	}
 
     for(uint32_t h = 0; h < frame->nHands; h++){
