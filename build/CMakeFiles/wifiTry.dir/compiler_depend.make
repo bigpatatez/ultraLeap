@@ -138,7 +138,8 @@ CMakeFiles/wifiTry.dir/bram.c.o: ../bram.c \
   /usr/include/aarch64-linux-gnu/bits/mman.h \
   /usr/include/aarch64-linux-gnu/bits/mman-map-flags-generic.h \
   /usr/include/aarch64-linux-gnu/bits/mman-linux.h \
-  /usr/include/aarch64-linux-gnu/bits/mman-shared.h
+  /usr/include/aarch64-linux-gnu/bits/mman-shared.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h
 
 CMakeFiles/wifiTry.dir/mainprogram.c.o: ../mainprogram.c \
   /usr/include/stdc-predef.h \
@@ -318,7 +319,11 @@ CMakeFiles/wifiTry.dir/wifi.c.o: ../wifi.c \
   /usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h \
-  ../bram.h
+  ../bram.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h \
+  /usr/include/stdint.h \
+  /usr/include/aarch64-linux-gnu/bits/wchar.h
 
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h:

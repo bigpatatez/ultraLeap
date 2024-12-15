@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
+#include <stdbool.h>
 
 typedef struct {
     int fd;
@@ -68,6 +69,25 @@ int modifyBRAMBits(BRAMReader* reader, size_t offset, uint32_t mask, uint32_t bi
         return -1;
     }
     bitValues &= mask;
-    reader->bram[offset] = (reader->bram[offset] & ~mask) | (bitValues & mask);
+    reader->bram[offset] = (reader->bram[offset] & ~mask) | bitValues;
     return 0;
 }
+// Function to check if specific bits are set
+bool checkBits(uint32_t value, uint32_t bitmask) {
+    return (value & bitmask) == bitmask;
+}
+
+// Function to extract a range of bits
+uint32_t extract_bits(uint32_t value, int start, int length) {
+    if (start < 0 || start >= 32 || length <= 0 || start + length > 32) {
+        fprintf(stderr, "Invalid bit range\n");
+        return 0;
+    }
+
+    // Create a mask for the desired number of bits
+    uint32_t mask = (1U << length) - 1;
+
+    // Shift the value right to align the range, then apply the mask
+    return (value >> start) & mask;
+}
+
