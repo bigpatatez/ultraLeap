@@ -1,3 +1,4 @@
+
 // Created by Belgin Ayvat on 12/12/2024.
 //
 #include <stdio.h>
@@ -15,29 +16,27 @@
 #define SWIPE_VELOCITY_THRESHOLD 30.0 // cm/s
 #define BUFFER_SIZE 8
 
-#define PAUSE_MASK 0x1
-#define MODE_MASK 0x6
-#define VOLUME_MASK 0x7F8
-#define REVERB_MASK 0x800
-#define FILTER_TYPE_MASK 0x1C000
-#define FILTER_CUTOFF_MASK 0xC000
+
 
 //VALUES THAT IS NEEDED TO BE SET
-#define PAUSE 0x1
-#define VOLUME_MODE 0x2
-#define REVERB_MODE 0x4
-#define FILTER_MODE 0x6
-#define VOL_LOW 0x8
-#define VOL_MED 0x10
-#define VOL_HIGH 0x18
-#define REVERB_ON 0x800
-#define FILTER1 0x1000
-#define FILTER2 0x2000
-#define FILTER3 0x3000
-#define FILTER4 0x4000
-#define FILTERLOW 0x8000
-#define FILTERMED 0x10000
-#define FILTERHIGH 0x18000
+#define PAUSE 1
+#define NO_MODE 0
+#define VOLUME_MODE 1
+#define FILTER_MODE 2
+#define SLOW_MODE 3
+
+#define VOL_LOW 0
+#define VOL_MED 50
+#define VOL_HIGH 100
+
+#define SLOWDOWN_EN 1
+
+#define FILTER1 1
+#define FILTER2 2
+#define FILTER3 3
+#define FILTER4 4
+
+
 
 typedef enum {
     IDLE,
@@ -69,7 +68,7 @@ BRAMReader reader;
 static LEAP_CONNECTION* connectionHandle;
 SWIPE_STATE swipeState = IDLE;
 GRAB_STATE grabState = START;
-MODE mode = IDLE;
+MODE mode = NOMODE;
 FILTER_TYPE filter_t = NOFILTER; 
 int swipe_frame_count = 0;
 int grab_frame_count = 0;
@@ -115,12 +114,33 @@ bool swiped(LEAP_HAND* hand) {
 }
 
 
-void detectCutOff(LEAP_HAND* hand) {
+void volumeLevel(LEAP_HAND* hand) {
 
     double pos_y = (hand->palm.position.y)/10.0;
-    printf("%s hand with %s level\n",(hand->type == eLeapHandType_Left ? "left" : "right"),(pos_y >= 12 && pos_y<22)? "low":
-    (pos_y>=22&&pos_y<32)?"medium":
-    (pos_y>=32&&pos_y<42)?"high":"out of range");
+    if(pos_y >= 12 && pos_y<22){
+    	pthread_mutex_lock(&buffer_mutex);
+    	uint32_t volume = (uint32_t)((0 * 0xFFFF) / 100);
+    	writeBRAMData(&reader,0,volume);
+    	pthread_mutex_unlock(&buffer_mutex);
+    	printf("volume low: wrote 0 to bram\n");
+    }
+    else if(pos_y>=22&&pos_y<32){
+    	pthread_mutex_lock(&buffer_mutex);
+  		uint32_t volume = (uint32_t)((50 * 0xFFFF) / 100);
+    	writeBRAMData(&reader,0,volume);
+    	pthread_mutex_unlock(&buffer_mutex);
+    	printf("volume medium: wrote 50 to bram\n");
+    }
+    else if(pos_y>=32&&pos_y<42){
+    	pthread_mutex_lock(&buffer_mutex);
+    	uint32_t volume = (uint32_t)((100 * 0xFFFF) / 100);
+    	writeBRAMData(&reader,0,volume);
+    	pthread_mutex_unlock(&buffer_mutex);
+    	printf("volume high: wrote 100 to bram\n");
+    }
+    else{
+    	printf("out of range\n");
+    }
 }
 
 void reverb_detect(LEAP_HAND* hand) {
@@ -203,20 +223,17 @@ static void deallocate(void* ptr, void* state) {
 }
 
 void getMode(uint32_t data){
-
-	uint32_t mode_num = extract_bits(data,1,2);
 	
-	
-	if(mode_num == 0x1){
+	if(data == 1){
 		mode = VOLUME;	
 	}
-	else if(mode_num == 0x2){
+	else if(data == 2){
 		mode = REVERB;
 	}
-	else if(mode_num == 0x3){
+	else if(data == 3){
 		mode = FILTER;
 	}
-	else{
+	else if(data == 0){
 		mode = NOMODE;
 	}
 	
@@ -229,18 +246,13 @@ static void OnFrame(const LEAP_TRACKING_EVENT *frame)
 {
     if (frame->info.frame_id %100==0)
         {printf("Frame %lli with %i hands.\n", (long long int)frame->info.frame_id, frame->nHands);
-<<<<<<< HEAD
-        pthread_mutex_lock(mutex);
-        readBRAMData(&reader,0,&data);
-        pthread_mutex_unlock(mutex);
-	    printf("buffer value %d\n",data);
-=======
+
 		pthread_mutex_lock(&buffer_mutex);
-        readBRAMData(&reader,0,&data);
+        readBRAMData(&reader,1,&data);
         pthread_mutex_unlock(&buffer_mutex);
 		printf("buffer value %#x\n",data);
 		getMode(data);
->>>>>>> b63daaddb7e7d8bb4719ed2effdd184cdf1809a5
+
 	}
 	
 
@@ -252,13 +264,15 @@ static void OnFrame(const LEAP_TRACKING_EVENT *frame)
         		printf("idle mode\n");
         	break;
         	case VOLUME:
+        		volumeLevel(hand);
         		printf("volume mode\n");
+        		
         	break;
         	case REVERB:
         		printf("reverb mode\n");
         	break;
         	case FILTER:
-        		printf("filter mode: a filter type needs to be chosen\n");
+        		printf("Filter mode!\n");
         	break;
 
         	default:

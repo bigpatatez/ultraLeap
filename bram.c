@@ -1,5 +1,5 @@
 
-#define BRAM_BASE_ADDR 0x82000000
+#define BRAM_BASE_ADDR 0x90000000
 #define BRAM_SIZE 0x2000 // Adjust as needed
 #include <stdint.h>
 #include <stdio.h>
